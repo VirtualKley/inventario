@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\ProductController;
@@ -29,3 +30,4 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('/products', ProductController::class)->names('products');
 Route::resource('/config/models', ModelController::class)->names('models');
 Route::resource('/config/colors', ColorController::class)->names('colors');
+Route::resource('/sales', SaleController::class)->names('sales');

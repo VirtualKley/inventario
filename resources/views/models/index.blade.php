@@ -30,7 +30,7 @@
             <div class="col-lg-6">
                 <table class="table">
                     <thead class="thead-dark">
-                      <tr>
+                      <tr style="text-align: center">
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Acciones</th>
@@ -38,7 +38,7 @@
                     </thead>
                     <tbody>
                         @forelse ( $models as $model)
-                            <tr>
+                            <tr style="text-align: center">
                                 <th scope="row">{{ $model->id }}</th>
                                 <td>{{ $model->nombre }}</td>
                                 <td>

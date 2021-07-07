@@ -259,6 +259,7 @@ return [
             'route'  => 'products.index',
             'icon' => 'fas fa-fw fa-box',
             'icon_color' => 'cyan',
+            'active' => ['/products', '/products/*']
         ],
         [
             'text'    => 'Inventario',
@@ -281,9 +282,10 @@ return [
         ['header' => 'Movimientos'],
         [
             'text' => 'Ingreso de ventas',
-            'url'  => '#',
+            'route'  => 'sales.index',
             'icon' => 'fas fa-fw fa-calculator',
             'icon_color' => 'red',
+            'active' => ['/sales', 'sales/*']
         ],
         ['header' => 'Estadistica'],
         [
