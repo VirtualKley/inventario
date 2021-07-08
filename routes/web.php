@@ -31,3 +31,5 @@ Route::resource('/products', ProductController::class)->names('products');
 Route::resource('/config/models', ModelController::class)->names('models');
 Route::resource('/config/colors', ColorController::class)->names('colors');
 Route::resource('/sales', SaleController::class)->names('sales');
+Route::get('/chart', [SaleController::class, 'chart'])->name('chart');
+

@@ -30,7 +30,7 @@
                                     @forelse ($products as $product)
                                         @if ($product->stock > 0)
                                             <option value="{{ $product->id }}">
-                                                {{ $product->nombre }}
+                                                {{ $product->nombre }} - {{ $product->model->nombre }} - {{ $product->color->nombre }}
                                             </option>
                                         @endif
                                     @empty
@@ -79,6 +79,7 @@
     <script>
         document.getElementById('total').value = '0.00';
         function addRowToTable(products){
+            var combo = document.getElementById("product_id");
             var selpro = document.getElementById('product_id').value;
             if (selpro != ''){
                 var productTable = document.getElementById('product-table');
@@ -93,7 +94,7 @@
                         var del = row.insertCell(5);
                         idpro.setAttribute('id', 'trOculto');
                         idpro.innerHTML = '<input class="form-control" type="text" name="idpro[]" required value="'+products[x].id+'">';
-                        desc.innerHTML = products[x].nombre;
+                        desc.innerHTML = combo.options[combo.selectedIndex].text;
                         can.innerHTML = '<input onkeyup="calImporte(this)" class="form-control" type="number" max="'+products[x].stock+'" name="cantidad[]" required placeholder="C:'+products[x].stock+'" value="1">';
                         pu.innerHTML = products[x].precio_venta;
                         imp.innerHTML = '<input style="text-align: center" class="form-control" type="text" name="subtotal_venta[]" id="subtotal_venta" value="'+products[x].precio_venta+'" readonly="readonly" required>';

@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->unsignedBigInteger('model_id')->nullable();
-            $table->foreign('model_id')->references('id')->on('models')
+            $table->foreign('model_id')->references('id')->on('modelos')
             ->onUpdate('cascade')
             ->onDelete('set null');
             $table->unsignedBigInteger('color_id')->nullable();
@@ -38,12 +38,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function(Blueprint $table){
-            $table->dropForeign('projects_model_id_foreign');
-            $table->dropColumn('model_id');
-            $table->dropForeign('projects_color_id_foreign');
-            $table->dropColumn('color_id');
-        });
         Schema::dropIfExists('products');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Sale;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class SaleController extends Controller
     }
 
     public function create(){
-        $products = Product::orderBy('id', 'ASC')->get(['id', 'nombre', 'stock', 'precio_compra', 'precio_venta']);
+        $products = Product::with(array('model', 'color'))->orderBy('id', 'ASC')->get(['id', 'nombre', 'stock', 'precio_compra', 'precio_venta', 'model_id', 'color_id']);
         // return $product;
         return view('sales.create', [
             'products' => $products
@@ -67,5 +68,20 @@ class SaleController extends Controller
             $sale->save();
         }
         return redirect()->route('sales.index');
+    }
+
+    public function chart(){
+        $product_sale = DB::table('product_sale')->get();
+        $week_sale = DB::table('product_sale')->whereBetween('created_at', [DB::raw('date_sub(now(),INTERVAL 1 WEEK)'), DB::raw('DATE(NOW()+INTERVAL 1 DAY)')]);
+        $year_sale = DB::table('product_sale')->where(DB::raw('MONTH(created_at)'), DB::raw('MONTH(now())'))->where(DB::raw('YEAR(created_at)'), DB::raw('YEAR(now())'));
+
+        return view('sales.data', [
+            'tcompra' => $product_sale->sum('subtotal_compra'),
+            'tventa' => $product_sale->sum('subtotal_venta'),
+            'scompra' => $week_sale->sum('subtotal_compra'),
+            'sventa' => $week_sale->sum('subtotal_venta'),
+            'acompra' => $year_sale->sum('subtotal_compra'),
+            'aventa' => $year_sale->sum('subtotal_venta')
+        ]);
     }
 }

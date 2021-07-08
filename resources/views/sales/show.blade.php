@@ -29,7 +29,7 @@
             <tbody>
                 @forelse ($products as $item)
                     <tr>
-                        <td>{{ $item->nombre }}</td>
+                        <td>{{ $item->nombre }} - {{ $item->model->nombre }} - {{ $item->color->nombre }}</td>
                         <td>{{ $item->pivot->cantidad }}</td>
                         <td>{{ $item->pivot->precio_venta }}</td>
                         <td>${{ $item->pivot->subtotal_venta }}</td>

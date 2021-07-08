@@ -290,7 +290,7 @@ return [
         ['header' => 'Estadistica'],
         [
             'text' => 'Resultados',
-            'url'  => '#',
+            'route'  => 'chart',
             'icon' => 'fas fa-fw fa-chart-line',
             'icon_color' => 'cyan',
         ],
